@@ -51,6 +51,9 @@ public class DeviceService {
                 case "lastUpdated":
                     comparator = Comparator.comparing(DeviceApplication::getLastUpdated);
                     break;
+                case "status":
+                    comparator = Comparator.comparing(DeviceApplication::getStatus);
+                    break;
                 default:
                     comparator = Comparator.comparing(DeviceApplication::getId); // default sorting
             }

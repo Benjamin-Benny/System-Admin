@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Table(name = "device_applications")
 public class DeviceApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

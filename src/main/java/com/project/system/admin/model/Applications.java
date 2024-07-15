@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "applications")
 public class Applications {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +15,8 @@ public class Applications {
     private String name;
     private String latestVersion;
 
-    @OneToMany(mappedBy = "applications", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DeviceApplication> deviceApplications;
+//    @OneToMany(mappedBy = "applications", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<DeviceApplication> deviceApplications;
 
     // Getters and setters
 }

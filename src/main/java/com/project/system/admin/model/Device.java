@@ -7,14 +7,15 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "devices")
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DeviceApplication> deviceApplications;
+//    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<DeviceApplication> deviceApplications;
 
     // Getters and setters
 }
