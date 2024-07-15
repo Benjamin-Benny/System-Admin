@@ -124,5 +124,5 @@ Updates the application to the latest version and sets the status to 'updated'.
 . 
 .
 .
-## Have a great day and Happy Coding!
+## Thank You and Happy Coding!
 
