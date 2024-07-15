@@ -1,8 +1,11 @@
 package com.project.system.admin.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 public class DeviceApplication {
     @Id
@@ -21,5 +24,4 @@ public class DeviceApplication {
     private String status;
     private LocalDateTime lastUpdated;
 
-    // Getters and setters
 }
