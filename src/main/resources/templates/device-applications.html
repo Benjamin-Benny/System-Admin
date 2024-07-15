@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Applications</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .sortable th {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Device Applications</h1>
+<table>
+    <thead>
+    <tr class="sortable">
+        <th onclick="sortTable('device')">Device</th>
+        <th onclick="sortTable('application')">Application</th>
+        <th onclick="sortTable('lastUpdated')">Last Updated</th>
+        <th onclick="sortTable('latestVersion')">Latest Version</th>
+        <th onclick="sortTable('currentVersion')">Current Version</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="da : ${deviceApplications}">
+        <td th:text="${da.device.name}"></td>
+        <td th:text="${da.application.name}"></td>
+        <td th:text="${#dates.format(da.lastUpdated, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${da.application.latestVersion}"></td>
+        <td th:text="${da.currentVersion}"></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function sortTable(sortBy) {
+        const url = new URL(window.location.href);
+        const currentSortBy = url.searchParams.get('sortBy');
+        const currentOrder = url.searchParams.get('order') || 'asc';
+        let newOrder = 'asc';
+        if (currentSortBy === sortBy && currentOrder === 'asc') {
+            newOrder = 'desc';
+        }
+        url.searchParams.set('sortBy', sortBy);
+        url.searchParams.set('order', newOrder);
+        window.location.href = url.href;
+    }
+</script>
+</body>
+</html>
