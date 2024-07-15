@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Applications</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        .sortable {
+            cursor: pointer;
+        }
+        .arrow {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Device Applications</h1>
+<table>
+    <thead>
+    <tr>
+        <th class="sortable" onclick="sortTable('device')">Device
+            <span th:if="${sortBy == 'device' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'device' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+        <th class="sortable" onclick="sortTable('application')">Application
+            <span th:if="${sortBy == 'application' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'application' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+        <th class="sortable" onclick="sortTable('lastUpdated')">Last Updated
+            <span th:if="${sortBy == 'lastUpdated' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'lastUpdated' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+        <th>Latest Version
+            <span th:if="${sortBy == 'latestVersion' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'latestVersion' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+        <th>Current Version
+            <span th:if="${sortBy == 'currentVersion' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'currentVersion' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+        <th class="sortable" onclick="sortTable('status')">Status
+            <span th:if="${sortBy == 'status' && order == 'asc'}" class="arrow">&#9650;</span>
+            <span th:if="${sortBy == 'status' && order == 'desc'}" class="arrow">&#9660;</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="da : ${deviceApplications}">
+        <td th:text="${da.device.name}"></td>
+        <td th:text="${da.applications.name}"></td>
+        <td th:text="${#temporals.format(da.lastUpdated, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${da.applications.latestVersion}"></td>
+        <td th:text="${da.currentVersion}"></td>
+        <td th:text="${da.status}"></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function sortTable(sortBy) {
+        const url = new URL(window.location.href);
+        const currentSortBy = url.searchParams.get('sortBy');
+        const currentOrder = url.searchParams.get('order') || 'asc';
+        let newOrder = 'asc';
+        if (currentSortBy === sortBy && currentOrder === 'asc') {
+            newOrder = 'desc';
+        }
+        url.searchParams.set('sortBy', sortBy);
+        url.searchParams.set('order', newOrder);
+        window.location.href = url.href;
+    }
+</script>
+</body>
+</html>
